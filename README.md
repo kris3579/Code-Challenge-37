@@ -6,4 +6,4 @@ Write a function which takes in a graph and two vertices and performs a breadth-
 
 ## Travis
 
-
+[![Build Status](https://travis-ci.com/kris3579/Code-Challenge-37.svg?branch=master)](https://travis-ci.com/kris3579/Code-Challenge-37)
