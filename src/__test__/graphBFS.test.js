@@ -47,19 +47,14 @@ testUnconnectedGraph.addDirectedEdge(six, ten);
 testUnconnectedGraph.addDirectedEdge(five, twelve);
 testUnconnectedGraph.addDirectedEdge(seven, twelve);
 
-
 describe('graphBFS.js', () => {
   test('Success, returned maps first value as equal to the startNode, and the last key as equal to the endNode ', () => {
     const result = GraphBFS(testGraph, two, three);
-    const testMapBFSResultValuesIterator = result.values();
-    const testMapBFSResultKeysIterator = result.keys();
-    expect(testMapBFSResultValuesIterator.next().value.value).toEqual(two.value);
-    for (let i = 0; i < result.size; i++) {
-      if (i === result.size - 1) {
-        expect(testMapBFSResultKeysIterator.next().value.value).toEqual(three.value);
-      }
-      testMapBFSResultKeysIterator.next();
+    let currentValue = result.get(three);
+    while (currentValue !== two) {
+      currentValue = result.get(currentValue);
     }
+    expect(currentValue).toEqual(two);
   });
   test('Return null if the path is not possible due to unconnected nodes', () => {
     const result = GraphBFS(testUnconnectedGraph, five, six);
