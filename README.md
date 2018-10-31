@@ -2,8 +2,8 @@
 
 ## Challenge
 
-Write a function which takes in a string and and returns a map with a ket for every character and value of the number of instances of that character within the string.
+Write a function which takes in a graph and two vertices and performs a breadth-first-search to return a map of the path between the vertices
 
 ## Travis
 
-[![Build Status](https://travis-ci.com/kris3579/Code-Challenge-33.svg?branch=master)](https://travis-ci.com/kris3579/Code-Challenge-33)
+

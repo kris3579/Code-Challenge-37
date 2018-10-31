@@ -7,6 +7,10 @@ module.exports = function bfs(graph, startVertex, endVertex) {
   const visitedVertex = new Set();
   const parentPath = new Map();
 
+  if (!graph._adjacencyList.has(startVertex) || !graph._adjacencyList.has(endVertex)) {
+    return null;
+  }
+
   queue.enqueue(startVertex);
   visitedVertex.add(startVertex);
 

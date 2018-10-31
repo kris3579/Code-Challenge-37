@@ -28,10 +28,45 @@ testGraph.addDirectedEdge(one, three);
 testGraph.addDirectedEdge(three, eight);
 testGraph.addDirectedEdge(eight, twenty);
 
+const testUnconnectedGraph = new Graph();
+const five = new Vertex(5);
+const six = new Vertex(6);
+const seven = new Vertex(7);
+const ten = new Vertex(10);
+const twelve = new Vertex(12);
+const twentyFive = new Vertex(25);
+
+testUnconnectedGraph.addVertex(five);
+testUnconnectedGraph.addVertex(six);
+testUnconnectedGraph.addVertex(seven);
+testUnconnectedGraph.addVertex(ten);
+testUnconnectedGraph.addVertex(twelve);
+
+testUnconnectedGraph.addDirectedEdge(five, seven);
+testUnconnectedGraph.addDirectedEdge(six, ten);
+testUnconnectedGraph.addDirectedEdge(five, twelve);
+testUnconnectedGraph.addDirectedEdge(seven, twelve);
+
+
 describe('graphBFS.js', () => {
-  test('Returned empty map because of empty string', () => {
+  test('Success, returned maps first value as equal to the startNode, and the last key as equal to the endNode ', () => {
     const result = GraphBFS(testGraph, two, three);
-    const testMapBFSResultIterator = result.values();
-    expect(testMapBFSResultIterator.next().value.value).toEqual(0);
+    const testMapBFSResultValuesIterator = result.values();
+    const testMapBFSResultKeysIterator = result.keys();
+    expect(testMapBFSResultValuesIterator.next().value.value).toEqual(two.value);
+    for (let i = 0; i < result.size; i++) {
+      if (i === result.size - 1) {
+        expect(testMapBFSResultKeysIterator.next().value.value).toEqual(three.value);
+      }
+      testMapBFSResultKeysIterator.next();
+    }
+  });
+  test('Return null if the path is not possible due to unconnected nodes', () => {
+    const result = GraphBFS(testUnconnectedGraph, five, six);
+    expect(result).toEqual(null);
+  });
+  test('Return null if a given vertex does not exist in the graphs adjacency list', () => {
+    const result = GraphBFS(testGraph, two, twentyFive);
+    expect(result).toEqual(null);
   });
 });
